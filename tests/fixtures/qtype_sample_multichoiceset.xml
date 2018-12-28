@@ -9,7 +9,7 @@
   </question>
 
 <!-- question: 115000  -->
-  <question type="multichoiceset">
+  <question type="okimultiplechoicefalse2">
     <name>
       <text>All-or-nothing-001</text>
     </name>

@@ -17,7 +17,7 @@
 /**
  * Multiple choice question definition classes.
  *
- * @package    qtype_multichoiceset
+ * @package    qtype_okimultiplechoicefalse2
  * @copyright  2009 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -33,7 +33,7 @@ require_once($CFG->dirroot . '/question/type/multichoice/question.php');
  * @copyright  2010 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_multichoiceset_question extends qtype_multichoice_multi_question {
+class qtype_okimultiplechoicefalse2_question extends qtype_multichoice_multi_question {
 
     /**
      * Get the grade
@@ -44,20 +44,41 @@ class qtype_multichoiceset_question extends qtype_multichoice_multi_question {
      *      {@link question_attempt_step::get_qt_data()}.
      * @return array fraction and state
      */
-    public function grade_response(array $response) {
-        $fraction = 0;
-        list($numright, $total) = $this->get_num_parts_right($response);
-        $numwrong = $this->get_num_selected_choices($response) - $numright;
-        $numcorrect = $this->get_num_correct_choices();
-        if ($numwrong == 0 && $numcorrect == $numright) {
-            $fraction = 1;
+    public function get_num_selected_correct(array $response) {
+        $num_selected_correct = 0;
+        foreach ($this->order as $key => $ansid) {
+            if (!empty($response[$this->field($key)]) && !question_state::graded_state_for_fraction($this->answers[$ansid]->fraction)->is_incorrect()) {
+                $num_selected_correct += 1;
+            }
         }
+        return $num_selected_correct;
+    }
+
+    public function get_num_selected_incorrect(array $response) {
+        $num_selected_incorrect = 0;
+        foreach ($this->order as $key => $ansid) {
+            if (!empty($response[$this->field($key)]) && question_state::graded_state_for_fraction($this->answers[$ansid]->fraction)->is_incorrect()) {
+                $num_selected_incorrect += 1;
+            }
+        }
+        return $num_selected_incorrect;
+    }
+
+    public function grade_response(array $response) {
+        list($numright, $total) = $this->get_num_parts_right($response);
+        $numcorrect = $this->get_num_correct_choices();
+        $numincorrect = $total - $this->get_num_correct_choices();
+        $num_selected_correct = $this->get_num_selected_correct($response);
+        $num_selected_incorrect = $this->get_num_selected_incorrect($response);
+        $positivefraction = 1.0 / $numcorrect;
+        $negativefraction = min(1.0 / $numincorrect, 0.5);
+
+        $fraction = max(($num_selected_correct * $positivefraction) - ($num_selected_incorrect * $negativefraction), 0);
 
         $state = question_state::graded_state_for_fraction($fraction);
 
         return array($fraction, $state);
     }
-
     /**
      * Disable hint settings if too many choices selected
      *

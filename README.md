@@ -7,7 +7,7 @@ and is now maintained by Eoin Campbell.
 
 This version can be used with Moodle 3.0 to 3.4 versions.
 
-The official git repository of this question type is now https://github.com/ecampbell/moodle-qtype_multichoiceset
+The official git repository of this question type is now https://github.com/ecampbell/moodle-qtype_okimultiplechoicefalse2
 
 ### Description:
 
@@ -27,7 +27,7 @@ Before using this questiontype, teachers must really think if this grading is wh
 ### Installation
 
 #### Installation from the Moodle plugins Directory (preferred method)
-This question type is available at https://moodle.org/plugins/view/qtype_multichoiceset
+This question type is available at https://moodle.org/plugins/view/qtype_okimultiplechoicefalse2
 Install like any other plugin.
 
 #### Installation Using Git
@@ -35,12 +35,12 @@ Install like any other plugin.
 To install using git, type this command in the
 root of your Moodle install:
 
-    git clone git://github.com/ecampbell/moodle-qtype_multichoiceset.git question/type/multichoiceset
-    echo '/question/type/multichoiceset' >> .git/info/exclude
+    git clone git://github.com/ecampbell/moodle-qtype_okimultiplechoicefalse2.git question/type/okimultiplechoicefalse2
+    echo '/question/type/okimultiplechoicefalse2' >> .git/info/exclude
 
 #### Installation From Downloaded zip file
 
 Alternatively, download the zip from:
-  https://github.com/ecampbell/moodle-qtype_multichoiceset/archive/master.zip
+  https://github.com/ecampbell/moodle-qtype_okimultiplechoicefalse2/archive/master.zip
 
-unzip it into the question/type folder, and then rename the new folder to multichoiceset.
+unzip it into the question/type folder, and then rename the new folder to okimultiplechoicefalse2.

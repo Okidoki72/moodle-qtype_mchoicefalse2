@@ -17,7 +17,7 @@
 /**
  * Contains the helper class for the select missing words question type tests.
  *
- * @package    qtype_multichoiceset
+ * @package    qtype_okimultiplechoicefalse2
  * @copyright  2011 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -32,7 +32,7 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright  2011 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_multichoiceset_test_helper {
+class qtype_okimultiplechoicefalse2_test_helper {
     /**
      * Get dummy test questions.
      *
@@ -43,18 +43,18 @@ class qtype_multichoiceset_test_helper {
     }
 
     /**
-     * Makes a multichoiceset question with 2 correct answers.
+     * Makes a okimultiplechoicefalse2 question with 2 correct answers.
      *
      * @return qtype_miltichoiceset_question
      */
-    public function make_multichoiceset_question_two_of_four() {
-        question_bank::load_question_definition_classes('multichoiceset');
-        $mc = new qtype_multichoiceset_question();
+    public function make_okimultiplechoicefalse2_question_two_of_four() {
+        question_bank::load_question_definition_classes('okimultiplechoicefalse2');
+        $mc = new qtype_okimultiplechoicefalse2_question();
         test_question_maker::initialise_a_question($mc);
         $mc->name = 'All or nothing multiple choice choice question';
         $mc->questiontext = 'Which are the odd numbers?';
         $mc->generalfeedback = 'The odd numbers are One and Three.';
-        $mc->qtype = question_bank::get_qtype('multichoiceset');
+        $mc->qtype = question_bank::get_qtype('okimultiplechoicefalse2');
         $mc->shuffleanswers = 1;
         $mc->answernumbering = 'abc';
         test_question_maker::set_standard_combined_feedback_fields($mc);
@@ -72,14 +72,14 @@ class qtype_multichoiceset_test_helper {
      *
      * @return object
      */
-    public static function get_multichoiceset_question_data_two_of_four() {
+    public static function get_okimultiplechoicefalse2_question_data_two_of_four() {
         global $USER;
 
         $qdata = new stdClass();
 
         $qdata->createdby = $USER->id;
         $qdata->modifiedby = $USER->id;
-        $qdata->qtype = 'multichoiceset';
+        $qdata->qtype = 'okimultiplechoicefalse2';
         $qdata->name = 'All or nothing multiple choice choice question';
         $qdata->questiontext = 'Which are the odd numbers?';
         $qdata->questiontextformat = FORMAT_HTML;
@@ -161,7 +161,7 @@ class qtype_multichoiceset_test_helper {
      *
      * @return object
      */
-    public static function get_multichoiceset_question_form_data_two_of_four() {
+    public static function get_okimultiplechoicefalse2_question_form_data_two_of_four() {
         $qdata = new stdClass();
 
         $qdata->name = 'All or nothing multiple choice choice question';

@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-angular.module('mm.addons.qtype_multichoiceset', ['mm.core'])
+angular.module('mm.addons.qtype_okimultiplechoicefalse2', ['mm.core'])
 
 .config(function($mmQuestionDelegateProvider) {
-    $mmQuestionDelegateProvider.registerHandler('mmaQtypeMultichoiceSet', 'qtype_multichoiceset', '$mmaQtypeMultichoiceSetHandler');
+    $mmQuestionDelegateProvider.registerHandler('mmaQtypeokimultiplechoicefalse2', 'qtype_okimultiplechoicefalse2', '$mmaQtypeokimultiplechoicefalse2Handler');
 });

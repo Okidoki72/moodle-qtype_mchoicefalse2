@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Backup handler for Moodle 1.x Multichoiceset questions
+ * Backup handler for Moodle 1.x okimultiplechoicefalse2 questions
  *
- * @package    qtype_multichoiceset
+ * @package    qtype_okimultiplechoicefalse2
  * @copyright  2011 David Mudrak <david@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -25,12 +25,12 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * multichoiceset question type conversion handler
+ * okimultiplechoicefalse2 question type conversion handler
  *
  * @copyright  2011 David Mudrak <david@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class moodle1_qtype_multichoiceset_handler extends moodle1_qtype_handler {
+class moodle1_qtype_okimultiplechoicefalse2_handler extends moodle1_qtype_handler {
 
     /**
      * Return the subpaths within a question
@@ -40,12 +40,12 @@ class moodle1_qtype_multichoiceset_handler extends moodle1_qtype_handler {
     public function get_question_subpaths() {
         return array(
             'ANSWERS/ANSWER',
-            'MULTICHOICESET',
+            'okimultiplechoicefalse2',
         );
     }
 
     /**
-     * Appends the multichoiceset specific information to the question
+     * Appends the okimultiplechoicefalse2 specific information to the question
      *
      * @param array $data the question data
      * @param array $raw unused
@@ -57,11 +57,11 @@ class moodle1_qtype_multichoiceset_handler extends moodle1_qtype_handler {
             $this->write_answers($data['answers'], $this->pluginname);
         }
 
-        // Convert and write the multichoiceset.
-        if (!isset($data['multichoiceset'])) {
+        // Convert and write the okimultiplechoicefalse2.
+        if (!isset($data['okimultiplechoicefalse2'])) {
             // This should never happen, but it can do if the 1.9 site contained
             // corrupt data.
-            $data['multichoiceset'] = array(array(
+            $data['okimultiplechoicefalse2'] = array(array(
                 'shuffleanswers'                 => 1,
                 'correctfeedback'                => '',
                 'correctfeedbackformat'          => FORMAT_HTML,
@@ -71,39 +71,39 @@ class moodle1_qtype_multichoiceset_handler extends moodle1_qtype_handler {
                 'shownumcorrect'                => 0
             ));
         }
-        $this->write_multichoiceset($data['multichoiceset'], $data['oldqtextformat']);
+        $this->write_okimultiplechoicefalse2($data['okimultiplechoicefalse2'], $data['oldqtextformat']);
     }
 
     /**
-     * Converts the multichoiceset info and writes it into question XML
+     * Converts the okimultiplechoicefalse2 info and writes it into question XML
      *
-     * @param array $multichoicesets the grouped structure
+     * @param array $okimultiplechoicefalse2s the grouped structure
      * @param int $oldqtextformat - (see moodle1_question_bank_handler::process_question())
      */
-    protected function write_multichoiceset(array $multichoicesets, $oldqtextformat) {
+    protected function write_okimultiplechoicefalse2(array $okimultiplechoicefalse2s, $oldqtextformat) {
         global $CFG;
 
         // The grouped array is supposed to have just one element - let us use foreach anyway
         // just to be sure we do not loose anything.
-        foreach ($multichoicesets as $multichoiceset) {
+        foreach ($okimultiplechoicefalse2s as $okimultiplechoicefalse2) {
             // Append an artificial 'id' attribute (is not included in moodle.xml).
-            $multichoiceset['id'] = $this->converter->get_nextid();
+            $okimultiplechoicefalse2['id'] = $this->converter->get_nextid();
 
             // Replay the upgrade step 2009021801.
-            $multichoiceset['correctfeedbackformat']               = 0;
-            $multichoiceset['incorrectfeedbackformat']             = 0;
+            $okimultiplechoicefalse2['correctfeedbackformat']               = 0;
+            $okimultiplechoicefalse2['incorrectfeedbackformat']             = 0;
 
             if ($CFG->texteditors !== 'textarea' and $oldqtextformat == FORMAT_MOODLE) {
-                $multichoiceset['correctfeedback']         = text_to_html($multichoiceset['correctfeedback'], false, false, true);
-                $multichoiceset['correctfeedbackformat']   = FORMAT_HTML;
-                $multichoiceset['incorrectfeedback']       = text_to_html($multichoiceset['incorrectfeedback'], false, false, true);
-                $multichoiceset['incorrectfeedbackformat'] = FORMAT_HTML;
+                $okimultiplechoicefalse2['correctfeedback']         = text_to_html($okimultiplechoicefalse2['correctfeedback'], false, false, true);
+                $okimultiplechoicefalse2['correctfeedbackformat']   = FORMAT_HTML;
+                $okimultiplechoicefalse2['incorrectfeedback']       = text_to_html($okimultiplechoicefalse2['incorrectfeedback'], false, false, true);
+                $okimultiplechoicefalse2['incorrectfeedbackformat'] = FORMAT_HTML;
             } else {
-                $multichoiceset['correctfeedbackformat']   = $oldqtextformat;
-                $multichoiceset['incorrectfeedbackformat'] = $oldqtextformat;
+                $okimultiplechoicefalse2['correctfeedbackformat']   = $oldqtextformat;
+                $okimultiplechoicefalse2['incorrectfeedbackformat'] = $oldqtextformat;
             }
 
-            $this->write_xml('multichoiceset', $multichoiceset, array('/multichoiceset/id'));
+            $this->write_xml('okimultiplechoicefalse2', $okimultiplechoicefalse2, array('/okimultiplechoicefalse2/id'));
         }
     }
 }

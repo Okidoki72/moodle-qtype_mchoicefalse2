@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Backup handler for Moodle 2.x/3.x Multichoiceset questions
+ * Backup handler for Moodle 2.x/3.x okimultiplechoicefalse2 questions
  *
- * @package    qtype_multichoiceset
+ * @package    qtype_okimultiplechoicefalse2
  * @copyright  2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -27,12 +27,12 @@ defined('MOODLE_INTERNAL') || die();
 
 
 /**
- * Provides the information to backup multichoiceset questions
+ * Provides the information to backup okimultiplechoicefalse2 questions
  *
  * @copyright  2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class backup_qtype_multichoiceset_plugin extends backup_qtype_plugin {
+class backup_qtype_okimultiplechoicefalse2_plugin extends backup_qtype_plugin {
 
     /**
      * Returns the qtype information to attach to question element
@@ -40,7 +40,7 @@ class backup_qtype_multichoiceset_plugin extends backup_qtype_plugin {
     protected function define_question_plugin_structure() {
 
         // Define the virtual plugin element with the condition to fulfill.
-        $plugin = $this->get_plugin_element(null, '../../qtype', 'multichoiceset');
+        $plugin = $this->get_plugin_element(null, '../../qtype', 'okimultiplechoicefalse2');
 
         // Create one standard named plugin element (the visible container).
         $pluginwrapper = new backup_nested_element($this->get_recommended_name());
@@ -53,16 +53,16 @@ class backup_qtype_multichoiceset_plugin extends backup_qtype_plugin {
         $this->add_question_question_answers($pluginwrapper);
 
         // Now create the qtype own structures.
-        $multichoiceset = new backup_nested_element('multichoiceset', array('id'), array(
+        $okimultiplechoicefalse2 = new backup_nested_element('okimultiplechoicefalse2', array('id'), array(
             'layout', 'shuffleanswers',
             'correctfeedback', 'correctfeedbackformat',
             'incorrectfeedback', 'incorrectfeedbackformat', 'answernumbering', 'shownumcorrect'));
 
         // Now the own qtype tree.
-        $pluginwrapper->add_child($multichoiceset);
+        $pluginwrapper->add_child($okimultiplechoicefalse2);
 
         // Set source to populate the data.
-        $multichoiceset->set_source_table('qtype_multichoiceset_options', array('questionid' => backup::VAR_PARENTID));
+        $okimultiplechoicefalse2->set_source_table('qtype_okimultiplechoicefalse2_options', array('questionid' => backup::VAR_PARENTID));
 
         // Don't need to annotate ids nor files.
 

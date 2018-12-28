@@ -1,4 +1,4 @@
-@qtype @qtype_multichoiceset
+@qtype @qtype_okimultiplechoicefalse2
 Feature: Test exporting All-or-Nothing Multiple Choice questions
   As a teacher
   In order to be able to reuse my All-or-Nothing Multiple Choice questions
@@ -19,7 +19,7 @@ Feature: Test exporting All-or-Nothing Multiple Choice questions
       | Course       | C1        | Test questions |
     And the following "questions" exist:
       | questioncategory | qtype           | name             | template    |
-      | Test questions   | multichoiceset  | Multi-choice-001 | two_of_four |
+      | Test questions   | okimultiplechoicefalse2  | Multi-choice-001 | two_of_four |
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
 

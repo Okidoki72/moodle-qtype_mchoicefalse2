@@ -17,7 +17,7 @@
 /**
  * Unit tests for the mulitple choice question definition class.
  *
- * @package    qtype_multichoiceset
+ * @package    qtype_okimultiplechoicefalse2
  * @copyright  2009 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -26,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
-require_once($CFG->dirroot . '/question/type/multichoiceset/questiontype.php');
+require_once($CFG->dirroot . '/question/type/okimultiplechoicefalse2/questiontype.php');
 
 
 /**
@@ -35,11 +35,11 @@ require_once($CFG->dirroot . '/question/type/multichoiceset/questiontype.php');
  * @copyright  2009 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_multichoiceset_test extends advanced_testcase {
+class qtype_okimultiplechoicefalse2_test extends advanced_testcase {
     protected $qtype;
 
     protected function setUp() {
-        $this->qtype = new qtype_multichoiceset();
+        $this->qtype = new qtype_okimultiplechoicefalse2();
     }
 
     protected function tearDown() {
@@ -47,7 +47,7 @@ class qtype_multichoiceset_test extends advanced_testcase {
     }
 
     public function test_name() {
-        $this->assertEquals($this->qtype->name(), 'multichoiceset');
+        $this->assertEquals($this->qtype->name(), 'okimultiplechoicefalse2');
     }
 
     /**

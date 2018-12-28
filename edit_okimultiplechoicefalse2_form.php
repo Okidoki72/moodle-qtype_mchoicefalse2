@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Defines the editing form for the multichoiceset question type.
+ * Defines the editing form for the okimultiplechoicefalse2 question type.
  *
- * @package    qtype_multichoiceset
+ * @package    qtype_okimultiplechoicefalse2
  * @copyright  2007 Jamie Pratt
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -30,7 +30,7 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright  2007 Jamie Pratt
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_multichoiceset_edit_form extends question_edit_form {
+class qtype_okimultiplechoicefalse2_edit_form extends question_edit_form {
     /**
      * Add question-type specific form fields.
      *
@@ -85,7 +85,7 @@ class qtype_multichoiceset_edit_form extends question_edit_form {
         $repeated[] = $mform->createElement('editor', 'answer',
                 $label, array('rows' => 1), $this->editoroptions);
         $repeated[] = $mform->createElement('checkbox', 'correctanswer',
-                get_string('correctanswer', 'qtype_multichoiceset'));
+                get_string('correctanswer', 'qtype_okimultiplechoicefalse2'));
         $repeated[] = $mform->createElement('editor', 'feedback',
                 get_string('feedback', 'question'), array('rows' => 1), $this->editoroptions);
 
@@ -106,7 +106,7 @@ class qtype_multichoiceset_edit_form extends question_edit_form {
         list($repeated, $repeatedoptions) = parent::get_hint_fields(
                 $withclearwrong, $withshownumpartscorrect);
         $repeated[] = $this->_form->createElement('advcheckbox', 'hintshowchoicefeedback', '',
-                get_string('showeachanswerfeedback', 'qtype_multichoiceset'));
+                get_string('showeachanswerfeedback', 'qtype_okimultiplechoicefalse2'));
         return array($repeated, $repeatedoptions);
     }
 
@@ -193,7 +193,7 @@ class qtype_multichoiceset_edit_form extends question_edit_form {
 
         // Perform sanity checks on number of correct answers.
         if ($numberofcorrectanswers == 0) {
-            $errors['answer[0]'] = get_string('errnocorrect', 'qtype_multichoiceset');
+            $errors['answer[0]'] = get_string('errnocorrect', 'qtype_okimultiplechoicefalse2');
         }
 
         // Perform sanity checks on number of answers.
@@ -212,6 +212,6 @@ class qtype_multichoiceset_edit_form extends question_edit_form {
      * @return string the question type name
      */
     public function qtype() {
-        return 'multichoiceset';
+        return 'okimultiplechoicefalse2';
     }
 }

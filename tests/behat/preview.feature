@@ -1,4 +1,4 @@
-@qtype @qtype_multichoiceset
+@qtype @qtype_okimultiplechoicefalse2
 Feature: Preview a All-or-Nothing Multiple Choice question
   As a teacher
   In order to check my All-or-Nothing Multiple Choice questions will work for students
@@ -19,7 +19,7 @@ Feature: Preview a All-or-Nothing Multiple Choice question
       | Course       | C1        | Test questions |
     And the following "questions" exist:
       | questioncategory | qtype          | name               | template    |
-      | Test questions   | multichoiceset | All-or-nothing-001 | two_of_four |
+      | Test questions   | okimultiplechoicefalse2 | All-or-nothing-001 | two_of_four |
     Given I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I navigate to "Question bank" node in "Course administration"
