@@ -17,7 +17,7 @@
 /**
  * All or nothing multiple choice question type upgrade code.
  *
- * @package    qtype_okimultiplechoicefalse2
+ * @package    qtype_mchoicefalse2
  * @copyright  1999 onwards Martin Dougiamas {@link http://moodle.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -25,19 +25,19 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Converts the okimultiplechoicefalse2 info and writes it into the question.xml
+ * Converts the mchoicefalse2 info and writes it into the question.xml
  *
  * @param int $oldversion the old (i.e. current) version of Moodle
  */
-function xmldb_qtype_okimultiplechoicefalse2_upgrade($oldversion) {
+function xmldb_qtype_mchoicefalse2_upgrade($oldversion) {
     global $CFG, $DB;
 
     $dbman = $DB->get_manager();
 
     if ($oldversion < 2011010400) {
 
-        // Define field correctfeedbackformat to be added to question_okimultiplechoicefalse2.
-        $table = new xmldb_table('question_okimultiplechoicefalse2');
+        // Define field correctfeedbackformat to be added to question_mchoicefalse2.
+        $table = new xmldb_table('question_mchoicefalse2');
         $field = new xmldb_field('correctfeedbackformat', XMLDB_TYPE_INTEGER, '2',
                 null, XMLDB_NOTNULL, null, '0', 'correctfeedback');
 
@@ -46,7 +46,7 @@ function xmldb_qtype_okimultiplechoicefalse2_upgrade($oldversion) {
             $dbman->add_field($table, $field);
         }
 
-        // Define field incorrectfeedbackformat to be added to question_okimultiplechoicefalse2.
+        // Define field incorrectfeedbackformat to be added to question_mchoicefalse2.
         $field = new xmldb_field('incorrectfeedbackformat', XMLDB_TYPE_INTEGER, '2',
                 null, XMLDB_NOTNULL, null, '0', 'incorrectfeedback');
 
@@ -69,7 +69,7 @@ function xmldb_qtype_okimultiplechoicefalse2_upgrade($oldversion) {
         if ($dbman->field_exists($table, $field)) {
             $rs = $DB->get_recordset_sql('
                     SELECT qm.*, q.oldquestiontextformat
-                    FROM {question_okimultiplechoicefalse2} qm
+                    FROM {question_mchoicefalse2} qm
                     JOIN {question} q ON qm.question = q.id');
             foreach ($rs as $record) {
                 if ($CFG->texteditors !== 'textarea' && $record->oldquestiontextformat == FORMAT_MOODLE) {
@@ -81,12 +81,12 @@ function xmldb_qtype_okimultiplechoicefalse2_upgrade($oldversion) {
                     $record->correctfeedbackformat = $record->oldquestiontextformat;
                     $record->incorrectfeedbackformat = $record->oldquestiontextformat;
                 }
-                $DB->update_record('question_okimultiplechoicefalse2', $record);
+                $DB->update_record('question_mchoicefalse2', $record);
             }
             $rs->close();
         }
-        // Record that qtype_okimultiplechoicefalse2 savepoint reached.
-        upgrade_plugin_savepoint(true, 2011010400, 'qtype', 'okimultiplechoicefalse2');
+        // Record that qtype_mchoicefalse2 savepoint reached.
+        upgrade_plugin_savepoint(true, 2011010400, 'qtype', 'mchoicefalse2');
     }
 
     // Add new shownumcorrect field. If this is true, then when the user gets a
@@ -94,8 +94,8 @@ function xmldb_qtype_okimultiplechoicefalse2_upgrade($oldversion) {
     // they got correct alongside the feedback.
     if ($oldversion < 2011011200) {
 
-        // Define field shownumcorrect to be added to question_okimultiplechoicefalse2.
-        $table = new xmldb_table('question_okimultiplechoicefalse2');
+        // Define field shownumcorrect to be added to question_mchoicefalse2.
+        $table = new xmldb_table('question_mchoicefalse2');
         $field = new xmldb_field('shownumcorrect', XMLDB_TYPE_INTEGER, '2', null,
                 XMLDB_NOTNULL, null, '0', 'answernumbering');
 
@@ -104,8 +104,8 @@ function xmldb_qtype_okimultiplechoicefalse2_upgrade($oldversion) {
             $dbman->add_field($table, $field);
         }
 
-        // Record that qtype_okimultiplechoicefalse2 savepoint reached.
-        upgrade_plugin_savepoint(true, 2011011200, 'qtype', 'okimultiplechoicefalse2');
+        // Record that qtype_mchoicefalse2 savepoint reached.
+        upgrade_plugin_savepoint(true, 2011011200, 'qtype', 'mchoicefalse2');
     }
 
     // Moodle v2.1.0 release upgrade line
@@ -130,52 +130,52 @@ function xmldb_qtype_okimultiplechoicefalse2_upgrade($oldversion) {
         // Find duplicate rows before they break the2013110504 step below.
         $problemids = $DB->get_recordset_sql("
                 SELECT question, MIN(id) AS recordidtokeep
-                  FROM {question_okimultiplechoicefalse2}
+                  FROM {question_mchoicefalse2}
               GROUP BY question
                 HAVING COUNT(1) > 1
                 ");
         foreach ($problemids as $problem) {
-            $DB->delete_records_select('question_okimultiplechoicefalse2',
+            $DB->delete_records_select('question_mchoicefalse2',
                     'question = ? AND id > ?',
                     array($problem->question, $problem->recordidtokeep));
         }
         $problemids->close();
 
-        // Record that qtype_okimultiplechoicefalse2 savepoint reached.
-        upgrade_plugin_savepoint(true, 2013110500, 'qtype', 'okimultiplechoicefalse2');
+        // Record that qtype_mchoicefalse2 savepoint reached.
+        upgrade_plugin_savepoint(true, 2013110500, 'qtype', 'mchoicefalse2');
     }
 
     if ($oldversion < 2013110501) {
 
-        // Define table question_okimultiplechoicefalse2 to be renamed to qtype_okimultiplechoicefalse2_options.
-        $table = new xmldb_table('question_okimultiplechoicefalse2');
+        // Define table question_mchoicefalse2 to be renamed to qtype_mchoicefalse2_options.
+        $table = new xmldb_table('question_mchoicefalse2');
 
-        // Launch rename table for question_okimultiplechoicefalse2.
+        // Launch rename table for question_mchoicefalse2.
         if ($dbman->table_exists($table)) {
-            $dbman->rename_table($table, 'qtype_okimultiplechoicefalse2_options');
+            $dbman->rename_table($table, 'qtype_mchoicefalse2_options');
         }
 
-        // Record that qtype_okimultiplechoicefalse2 savepoint was reached.
-        upgrade_plugin_savepoint(true, 2013110501, 'qtype', 'okimultiplechoicefalse2');
+        // Record that qtype_mchoicefalse2 savepoint was reached.
+        upgrade_plugin_savepoint(true, 2013110501, 'qtype', 'mchoicefalse2');
     }
 
     if ($oldversion < 2013110502) {
 
-        // Define key question (foreign) to be dropped form qtype_okimultiplechoicefalse2_options.
-        $table = new xmldb_table('qtype_okimultiplechoicefalse2_options');
+        // Define key question (foreign) to be dropped form qtype_mchoicefalse2_options.
+        $table = new xmldb_table('qtype_mchoicefalse2_options');
         $key = new xmldb_key('question', XMLDB_KEY_FOREIGN, array('question'), 'question', array('id'));
 
         // Launch drop key question.
         $dbman->drop_key($table, $key);
 
-        // Record that qtype_okimultiplechoicefalse2 savepoint was reached.
-        upgrade_plugin_savepoint(true, 2013110502, 'qtype', 'okimultiplechoicefalse2');
+        // Record that qtype_mchoicefalse2 savepoint was reached.
+        upgrade_plugin_savepoint(true, 2013110502, 'qtype', 'mchoicefalse2');
     }
 
     if ($oldversion < 2013110503) {
 
-        // Rename field question on table qtype_okimultiplechoicefalse2_options to questionid.
-        $table = new xmldb_table('qtype_okimultiplechoicefalse2_options');
+        // Rename field question on table qtype_mchoicefalse2_options to questionid.
+        $table = new xmldb_table('qtype_mchoicefalse2_options');
         $field = new xmldb_field('question', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0', 'id');
 
         // Launch rename field question.
@@ -183,27 +183,27 @@ function xmldb_qtype_okimultiplechoicefalse2_upgrade($oldversion) {
             $dbman->rename_field($table, $field, 'questionid');
         }
 
-        // Record that qtype_okimultiplechoicefalse2 savepoint was reached.
-        upgrade_plugin_savepoint(true, 2013110503, 'qtype', 'okimultiplechoicefalse2');
+        // Record that qtype_mchoicefalse2 savepoint was reached.
+        upgrade_plugin_savepoint(true, 2013110503, 'qtype', 'mchoicefalse2');
     }
 
     if ($oldversion < 2013110504) {
 
-        // Define key questionid (foreign-unique) to be added to qtype_okimultiplechoicefalse2_options.
-        $table = new xmldb_table('qtype_okimultiplechoicefalse2_options');
+        // Define key questionid (foreign-unique) to be added to qtype_mchoicefalse2_options.
+        $table = new xmldb_table('qtype_mchoicefalse2_options');
         $key = new xmldb_key('questionid', XMLDB_KEY_FOREIGN_UNIQUE, array('questionid'), 'question', array('id'));
 
         // Launch add key questionid.
         $dbman->add_key($table, $key);
 
-        // Record that qtype_okimultiplechoicefalse2 savepoint was reached.
-        upgrade_plugin_savepoint(true, 2013110504, 'qtype', 'okimultiplechoicefalse2');
+        // Record that qtype_mchoicefalse2 savepoint was reached.
+        upgrade_plugin_savepoint(true, 2013110504, 'qtype', 'mchoicefalse2');
     }
 
     if ($oldversion < 2013110505) {
 
-        // Define field answers to be dropped from qtype_okimultiplechoicefalse2_options.
-        $table = new xmldb_table('qtype_okimultiplechoicefalse2_options');
+        // Define field answers to be dropped from qtype_mchoicefalse2_options.
+        $table = new xmldb_table('qtype_mchoicefalse2_options');
         $field = new xmldb_field('answers');
 
         // Conditionally launch drop field answers.
@@ -211,20 +211,20 @@ function xmldb_qtype_okimultiplechoicefalse2_upgrade($oldversion) {
             $dbman->drop_field($table, $field);
         }
 
-        // Record that qtype_okimultiplechoicefalse2 savepoint was reached.
-        upgrade_plugin_savepoint(true, 2013110505, 'qtype', 'okimultiplechoicefalse2');
+        // Record that qtype_mchoicefalse2 savepoint was reached.
+        upgrade_plugin_savepoint(true, 2013110505, 'qtype', 'mchoicefalse2');
     }
 
     if ($oldversion < 2015040100) {
 
         // Fix wrong component for combined feedback files.
-        $params = array('component' => 'qtype_okimultiplechoicefalse2'
+        $params = array('component' => 'qtype_mchoicefalse2'
                 , 'filearea1' => 'correctfeedback', 'filearea2' => 'incorrectfeedback');
         $sql = "component = :component AND (filearea = :filearea1 OR filearea = :filearea2)";
         $DB->set_field_select('files', 'component', 'question', $sql, $params);
 
-        // Record that qtype_okimultiplechoicefalse2 savepoint was reached.
-        upgrade_plugin_savepoint(true, 2015040100, 'qtype', 'okimultiplechoicefalse2');
+        // Record that qtype_mchoicefalse2 savepoint was reached.
+        upgrade_plugin_savepoint(true, 2015040100, 'qtype', 'mchoicefalse2');
     }
 
     // Moodle v2.8.0 release upgrade line.

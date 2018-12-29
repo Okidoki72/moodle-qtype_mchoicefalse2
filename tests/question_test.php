@@ -17,7 +17,7 @@
 /**
  * Unit tests for the multiple choice question definition classes.
  *
- * @package    qtype_okimultiplechoicefalse2
+ * @package    qtype_mchoicefalse2
  * @copyright  2009 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/question/engine/tests/helpers.php');
-require_once($CFG->dirroot . '/question/type/okimultiplechoicefalse2/tests/helper.php');
+require_once($CFG->dirroot . '/question/type/mchoicefalse2/tests/helper.php');
 
 
 /**
@@ -36,19 +36,19 @@ require_once($CFG->dirroot . '/question/type/okimultiplechoicefalse2/tests/helpe
  * @copyright  2009 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_okimultiplechoicefalse2_question_test extends advanced_testcase {
+class qtype_mchoicefalse2_question_test extends advanced_testcase {
     /**
      * Get a test question.
      *
      * @param stdObject $which
-     * @return qtype_okimultiplechoicefalse2_question the requested question object.
+     * @return qtype_mchoicefalse2_question the requested question object.
      */
-    protected function get_test_okimultiplechoicefalse2_question($which = null) {
-        return test_question_maker::make_question('okimultiplechoicefalse2', $which);
+    protected function get_test_mchoicefalse2_question($which = null) {
+        return test_question_maker::make_question('mchoicefalse2', $which);
     }
 
     public function test_get_expected_data() {
-        $question = $this->get_test_okimultiplechoicefalse2_question('two_of_four');
+        $question = $this->get_test_mchoicefalse2_question('two_of_four');
         $question->start_attempt(new question_attempt_step(), 1);
 
         $this->assertEquals(array('choice0' => PARAM_BOOL, 'choice1' => PARAM_BOOL,
@@ -56,7 +56,7 @@ class qtype_okimultiplechoicefalse2_question_test extends advanced_testcase {
     }
 
     public function test_is_complete_response() {
-        $question = $this->get_test_okimultiplechoicefalse2_question('two_of_four');
+        $question = $this->get_test_mchoicefalse2_question('two_of_four');
         $question->start_attempt(new question_attempt_step(), 1);
 
         $this->assertFalse($question->is_complete_response(array()));
@@ -68,7 +68,7 @@ class qtype_okimultiplechoicefalse2_question_test extends advanced_testcase {
     }
 
     public function test_is_gradable_response() {
-        $question = $this->get_test_okimultiplechoicefalse2_question('two_of_four');
+        $question = $this->get_test_mchoicefalse2_question('two_of_four');
         $question->start_attempt(new question_attempt_step(), 1);
 
         $this->assertFalse($question->is_gradable_response(array()));
@@ -80,7 +80,7 @@ class qtype_okimultiplechoicefalse2_question_test extends advanced_testcase {
     }
 
     public function test_grading() {
-        $question = $this->get_test_okimultiplechoicefalse2_question('two_of_four');
+        $question = $this->get_test_mchoicefalse2_question('two_of_four');
         $question->shuffleanswers = false;
         $question->start_attempt(new question_attempt_step(), 1);
 
@@ -96,7 +96,7 @@ class qtype_okimultiplechoicefalse2_question_test extends advanced_testcase {
     }
 
     public function test_get_correct_response() {
-        $question = $this->get_test_okimultiplechoicefalse2_question('two_of_four');
+        $question = $this->get_test_mchoicefalse2_question('two_of_four');
         $question->shuffleanswers = false;
         $question->start_attempt(new question_attempt_step(), 1);
 
@@ -105,7 +105,7 @@ class qtype_okimultiplechoicefalse2_question_test extends advanced_testcase {
     }
 
     public function test_get_question_summary() {
-        $mc = $this->get_test_okimultiplechoicefalse2_question('two_of_four');
+        $mc = $this->get_test_mchoicefalse2_question('two_of_four');
         $mc->start_attempt(new question_attempt_step(), 1);
 
         $qsummary = $mc->get_question_summary();
@@ -117,7 +117,7 @@ class qtype_okimultiplechoicefalse2_question_test extends advanced_testcase {
     }
 
     public function test_summarise_response() {
-        $mc = $this->get_test_okimultiplechoicefalse2_question('two_of_four');
+        $mc = $this->get_test_mchoicefalse2_question('two_of_four');
         $mc->shuffleanswers = false;
         $mc->start_attempt(new question_attempt_step(), 1);
 
@@ -128,7 +128,7 @@ class qtype_okimultiplechoicefalse2_question_test extends advanced_testcase {
     }
 
     public function test_classify_response() {
-        $mc = $this->get_test_okimultiplechoicefalse2_question('two_of_four');
+        $mc = $this->get_test_mchoicefalse2_question('two_of_four');
         $mc->shuffleanswers = false;
         $mc->start_attempt(new question_attempt_step(), 1);
 

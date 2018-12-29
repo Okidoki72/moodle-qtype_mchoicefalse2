@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Restore handler for Moodle 2.x/3.x okimultiplechoicefalse2 questions
+ * Restore handler for Moodle 2.x/3.x mchoicefalse2 questions
  *
- * @package    qtype_okimultiplechoicefalse2
+ * @package    qtype_mchoicefalse2
  * @copyright  2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -27,12 +27,12 @@ defined('MOODLE_INTERNAL') || die();
 
 
 /**
- * Restore plugin class that provides the information needed to restore one okimultiplechoicefalse2 qtype
+ * Restore plugin class that provides the information needed to restore one mchoicefalse2 qtype
  *
  * @copyright  2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class restore_qtype_okimultiplechoicefalse2_plugin extends restore_qtype_plugin {
+class restore_qtype_mchoicefalse2_plugin extends restore_qtype_plugin {
 
     /**
      * Returns the paths to be handled by the plugin at question level
@@ -45,21 +45,21 @@ class restore_qtype_okimultiplechoicefalse2_plugin extends restore_qtype_plugin 
         $this->add_question_question_answers($paths);
 
         // Add own qtype stuff.
-        $elename = 'okimultiplechoicefalse2';
+        $elename = 'mchoicefalse2';
         // We used get_recommended_name() so this works.
-        $elepath = $this->get_pathfor('/okimultiplechoicefalse2');
+        $elepath = $this->get_pathfor('/mchoicefalse2');
         $paths[] = new restore_path_element($elename, $elepath);
 
         return $paths; // And we return the interesting paths.
     }
 
     /**
-     * Process the qtype/okimultiplechoicefalse2 element
+     * Process the qtype/mchoicefalse2 element
      *
      * @param stdObject $data question data
      * @return void
      */
-    public function process_okimultiplechoicefalse2($data) {
+    public function process_mchoicefalse2($data) {
         global $DB;
 
         $data = (object)$data;
@@ -71,16 +71,16 @@ class restore_qtype_okimultiplechoicefalse2_plugin extends restore_qtype_plugin 
         $questioncreated = (bool) $this->get_mappingid('question_created', $oldquestionid);
 
         // If the question has been created by restore, we need to create its
-        // qtype_okimultiplechoicefalse2_options too.
+        // qtype_mchoicefalse2_options too.
         if ($questioncreated) {
             // Adjust some columns.
             $data->questionid = $newquestionid;
 
             // It is possible for old backup files to contain unique key violations.
             // We need to check to avoid that.
-            if (!$DB->record_exists('qtype_okimultiplechoicefalse2_options', array('questionid' => $data->questionid))) {
-                $newitemid = $DB->insert_record('qtype_okimultiplechoicefalse2_options', $data);
-                $this->set_mapping('qtype_okimultiplechoicefalse2_options', $oldid, $newitemid);
+            if (!$DB->record_exists('qtype_mchoicefalse2_options', array('questionid' => $data->questionid))) {
+                $newitemid = $DB->insert_record('qtype_mchoicefalse2_options', $data);
+                $this->set_mapping('qtype_mchoicefalse2_options', $oldid, $newitemid);
             }
         }
     }
@@ -117,7 +117,7 @@ class restore_qtype_okimultiplechoicefalse2_plugin extends restore_qtype_plugin 
 
     /**
      * Given one question_states record, return the answer
-     * recoded pointing to all the restored stuff for okimultiplechoicefalse2 questions
+     * recoded pointing to all the restored stuff for mchoicefalse2 questions
      *
      * answer are two (hypen speparated) lists of comma separated question_answers
      * the first to specify the order of the answers and the second to specify the
@@ -170,8 +170,8 @@ class restore_qtype_okimultiplechoicefalse2_plugin extends restore_qtype_plugin 
         $contents = array();
 
         $fields = array('correctfeedback', 'incorrectfeedback');
-        $contents[] = new restore_decode_content('qtype_okimultiplechoicefalse2_options',
-                $fields, 'qtype_okimultiplechoicefalse2_options');
+        $contents[] = new restore_decode_content('qtype_mchoicefalse2_options',
+                $fields, 'qtype_mchoicefalse2_options');
 
         return $contents;
     }

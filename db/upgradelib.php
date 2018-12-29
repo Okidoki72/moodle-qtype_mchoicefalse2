@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Upgrade library code for the okimultiplechoicefalse2 question type.
+ * Upgrade library code for the mchoicefalse2 question type.
  *
- * @package    qtype_okimultiplechoicefalse2
+ * @package    qtype_mchoicefalse2
  * @copyright  2010 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -25,14 +25,14 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Class to convert okimultiplechoicefalse2 question attempt data when upgrading to the new question engine.
+ * Class to convert mchoicefalse2 question attempt data when upgrading to the new question engine.
  *
  * This class is used by the code in question/engine/upgrade/upgradelib.php.
  *
  * @copyright  2010 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_okimultiplechoicefalse2_qe2_attempt_updater extends question_qtype_attempt_updater {
+class qtype_mchoicefalse2_qe2_attempt_updater extends question_qtype_attempt_updater {
     /** @var array variable name => value */
     protected $order;
 
@@ -43,7 +43,7 @@ class qtype_okimultiplechoicefalse2_qe2_attempt_updater extends question_qtype_a
      * @return boolean
      */
     public function is_blank_answer($state) {
-        // Blank okimultiplechoicefalse2 answers are not empty strings, they rather end in a colon.
+        // Blank mchoicefalse2 answers are not empty strings, they rather end in a colon.
         return empty($state->answer) || substr($state->answer, -1) == ':';
     }
 

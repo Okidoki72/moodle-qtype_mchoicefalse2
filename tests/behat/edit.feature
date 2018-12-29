@@ -1,4 +1,4 @@
-@qtype @qtype_okimultiplechoicefalse2
+@qtype @qtype_mchoicefalse2
 Feature: Test editing a All-or-Nothing Multiple Choice question
   As a teacher
   In order to be able to update my All-or-Nothing Multiple Choice question
@@ -19,7 +19,7 @@ Feature: Test editing a All-or-Nothing Multiple Choice question
       | Course       | C1        | Test questions |
     And the following "questions" exist:
       | questioncategory | qtype          | name                        | template    |
-      | Test questions   | okimultiplechoicefalse2 | All-or-nothing for editing  | two_of_four |
+      | Test questions   | mchoicefalse2 | All-or-nothing for editing  | two_of_four |
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I navigate to "Question bank" node in "Course administration"

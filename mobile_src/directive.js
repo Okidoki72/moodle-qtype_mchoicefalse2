@@ -22,12 +22,12 @@ angular.module('mm.addons.qtype_multichoice')
  * @name mmaQtypeMultichoice
  */
 .directive('mmaQtypeMultichoice', function($log, $mmQuestionHelper) {
-	$log = $log.getInstance('mmaQtypeokimultiplechoicefalse2');
+	$log = $log.getInstance('mmaQtypemchoicefalse2');
 
     return {
         restrict: 'A',
         priority: 100,
-        templateUrl: 'addons/qtype/okimultiplechoicefalse2/template.html',
+        templateUrl: 'addons/qtype/mchoicefalse2/template.html',
         link: function(scope) {
         	$mmQuestionHelper.multiChoiceDirective(scope, $log);
         }

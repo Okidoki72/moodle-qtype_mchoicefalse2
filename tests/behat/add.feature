@@ -1,4 +1,4 @@
-@qtype @qtype_okimultiplechoicefalse2
+@qtype @qtype_mchoicefalse2
 Feature: Test creating a All-or-Nothing Multiple Choice question
   As a teacher
   In order to test my students

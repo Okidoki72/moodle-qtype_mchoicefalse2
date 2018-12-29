@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-angular.module('mm.addons.qtype_okimultiplechoicefalse2', ['mm.core'])
+angular.module('mm.addons.qtype_mchoicefalse2', ['mm.core'])
 
 .config(function($mmQuestionDelegateProvider) {
-    $mmQuestionDelegateProvider.registerHandler('mmaQtypeokimultiplechoicefalse2', 'qtype_okimultiplechoicefalse2', '$mmaQtypeokimultiplechoicefalse2Handler');
+    $mmQuestionDelegateProvider.registerHandler('mmaQtypemchoicefalse2', 'qtype_mchoicefalse2', '$mmaQtypemchoicefalse2Handler');
 });

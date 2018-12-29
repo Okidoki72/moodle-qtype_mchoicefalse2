@@ -1,4 +1,4 @@
-@qtype @qtype_okimultiplechoicefalse2
+@qtype @qtype_mchoicefalse2
 Feature: Test importing All-or-Nothing Multiple Choice questions
   As a teacher
   In order to reuse All-or-Nothing Multiple Choice questions
@@ -21,7 +21,7 @@ Feature: Test importing All-or-Nothing Multiple Choice questions
   Scenario: import All-or-Nothing Multiple Choice question.
     When I navigate to "Import" node in "Course administration > Question bank"
     And I set the field "id_format_xml" to "1"
-    And I upload "question/type/okimultiplechoicefalse2/tests/fixtures/qtype_sample_okimultiplechoicefalse2.xml" file to "Import" filemanager
+    And I upload "question/type/mchoicefalse2/tests/fixtures/qtype_sample_mchoicefalse2.xml" file to "Import" filemanager
     And I press "id_submitbutton"
     Then I should see "Parsing questions from import file."
     And I should see "Importing 1 questions from file"
