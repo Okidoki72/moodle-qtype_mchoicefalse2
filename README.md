@@ -1,17 +1,16 @@
-All or Nothing Question type
-----------------------------
+Moodle multiple-choice question type with 'false2' penalty for selected incorrect choice
+----------------------------------------------------------------------------------------
 
-This is a multiple-choice, multiple-response question type that was created by
-Adriane Boyd (adrianeboyd@gmail.com), later maintained by Jean-Michel Vedrine (vedrine@vedrine.net)
-and is now maintained by Eoin Campbell.
+This is a multiple-choice, multiple-response question type that integrates a 'false2' penalty for any selected
+incorrect choice,
 
-This version can be used with Moodle 3.0 to 3.4 versions.
+This version can be used with Moodle 3.0 to 3.6 versions.
 
-The official git repository of this question type is now https://github.com/ecampbell/moodle-qtype_mchoiceftwo
+The official git repository of this question type is now https://github.com/Okidoki72/moodle-qtype_mchoiceftwo
 
 ### Description:
 
-The all or nothing question is adapted from the existing multichoice question.
+The multiple-choice question type with 'false2' penalty is adapted from the existing multichoice question.
 The main difference from the standard Moodle multiple choice question type is
 in the way that grading works.
 The teacher editing interface is slightly modified as when creating the question, the teacher just
@@ -19,28 +18,59 @@ indicates which choices are correct.
 
 ### Grading:
 
-In an all-or-nothing multiple choice question, a respondent can choose one or more answers.
-If the chosen answers correspond exactly to the correct choices defined in the question, the respondent gets 100%.
-If he/she chooses any incorrect choices or does not select all of the correct choices, the grade is 0%.
+In an multiple-choice question type with 'false2' penalty, a respondent can choose one or more answers.
+The evaluation policy is the following:
+* If #correct is the number of correct options,
+* and #incorrect the number of incorrect options,
+* 1/#correct of the points are given for each correct choice selected,
+* 1/max(#incorrect, 2) of the points are substracted for each incorrect choice selected,
+* The minimum score is 0
+
+**Example 1:**
+(Question: 10 points) Albert Einstein:
+- [ ] was soccer player
+- [x] was a theoretical physicist
+- [x] developed the theory of relativity
+- [x] is best known for for his mass–energy equivalence formula E=mc^2
+- [ ] received the Nobel Prize
+- [x] was a musicologist
+- [ ] is best known for his contributions to the science of evolution
+
+There are 4 correct options (#correct = 4)  and 3 incorrect options (#incorrect = 3).
+Since there are 3 correct options selected and 1 incorrect option selected, the score is:
+
+[(3/#correct) – (1/max(#incorrect, 2))] x 10 = 4.16 points.
+
+**Example 2:**
+(Question: 10 points) Albert Einstein:
+- [x] was a theoretical physicist
+- [x] developed the theory of relativity
+- [x] is best known for for his mass–energy equivalence formula E=mc^2
+- [ ] received the Nobel Prize
+- [x] was a musicologist
+
+There are 4 correct options (#correct = 4)  and 1 incorrect options (#incorrect = 1).
+Since there are 3 correct options selected and 1 incorrect option selected, the score is:
+
+[(3/#correct) – (1/max(#incorrect, 2))] x 10 = 2.5 points.
+
 Before using this questiontype, teachers must really think if this grading is what they want.
 
 ### Installation
 
-#### Installation from the Moodle plugins Directory (preferred method)
-This question type is available at https://moodle.org/plugins/view/qtype_mchoiceftwo
-Install like any other plugin.
+This question type is still not available on https://moodle.org/plugins/
 
 #### Installation Using Git
 
 To install using git, type this command in the
 root of your Moodle install:
 
-    git clone git://github.com/ecampbell/moodle-qtype_mchoiceftwo.git question/type/mchoiceftwo
+    git clone git://github.com/Okidoki72/moodle-qtype_mchoiceftwo.git question/type/mchoiceftwo
     echo '/question/type/mchoiceftwo' >> .git/info/exclude
 
 #### Installation From Downloaded zip file
 
 Alternatively, download the zip from:
-  https://github.com/ecampbell/moodle-qtype_mchoiceftwo/archive/master.zip
+  https://github.com/Okidoki72/moodle-qtype_mchoiceftwo/archive/master.zip
 
 unzip it into the question/type folder, and then rename the new folder to mchoiceftwo.
