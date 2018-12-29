@@ -21,7 +21,7 @@
  * tests. (Search for test_question_maker::make_a_multichoice.) This file only
  * contains a few additional tests for problems that were found during testing.
  *
- * @package    qtype_mchoicefalse2
+ * @package    qtype_mchoiceftwo
  * @copyright  2010 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -32,7 +32,7 @@ defined('MOODLE_INTERNAL') || die();
 global $CFG;
 require_once($CFG->dirroot . '/question/engine/lib.php');
 require_once($CFG->dirroot . '/question/engine/tests/helpers.php');
-require_once($CFG->dirroot . '/question/type/mchoicefalse2/tests/helper.php');
+require_once($CFG->dirroot . '/question/type/mchoiceftwo/tests/helper.php');
 
 /**
  * Unit tests for the mutiple choice all or nothingquestion type.
@@ -40,11 +40,11 @@ require_once($CFG->dirroot . '/question/type/mchoicefalse2/tests/helper.php');
  * @copyright  2010 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_mchoicefalse2_walkthrough_test extends qbehaviour_walkthrough_test_base {
+class qtype_mchoiceftwo_walkthrough_test extends qbehaviour_walkthrough_test_base {
 
-    public function test_deferredfeedback_feedback_mchoicefalse2() {
-        // Create a mchoicefalse2 question.
-        $mc = $dd = test_question_maker::make_question('mchoicefalse2');
+    public function test_deferredfeedback_feedback_mchoiceftwo() {
+        // Create a mchoiceftwo question.
+        $mc = $dd = test_question_maker::make_question('mchoiceftwo');
         $mc->shuffleanswers = false;
 
         $this->start_attempt_at_question($mc, 'deferredfeedback', 2);
@@ -64,10 +64,10 @@ class qtype_mchoicefalse2_walkthrough_test extends qbehaviour_walkthrough_test_b
                 new question_pattern_expectation('/class="r1"/'));
     }
 
-    public function test_deferredfeedback_resume_mchoicefalse2_right_right() {
+    public function test_deferredfeedback_resume_mchoiceftwo_right_right() {
 
-        // Create a mchoicefalse2 question.
-        $mc = $dd = test_question_maker::make_question('mchoicefalse2');
+        // Create a mchoiceftwo question.
+        $mc = $dd = test_question_maker::make_question('mchoiceftwo');
         $mc->shuffleanswers = false;
 
         $this->start_attempt_at_question($mc, 'deferredfeedback', 2);

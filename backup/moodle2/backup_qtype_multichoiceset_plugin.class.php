@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Backup handler for Moodle 2.x/3.x mchoicefalse2 questions
+ * Backup handler for Moodle 2.x/3.x mchoiceftwo questions
  *
- * @package    qtype_mchoicefalse2
+ * @package    qtype_mchoiceftwo
  * @copyright  2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -27,12 +27,12 @@ defined('MOODLE_INTERNAL') || die();
 
 
 /**
- * Provides the information to backup mchoicefalse2 questions
+ * Provides the information to backup mchoiceftwo questions
  *
  * @copyright  2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class backup_qtype_mchoicefalse2_plugin extends backup_qtype_plugin {
+class backup_qtype_mchoiceftwo_plugin extends backup_qtype_plugin {
 
     /**
      * Returns the qtype information to attach to question element
@@ -40,7 +40,7 @@ class backup_qtype_mchoicefalse2_plugin extends backup_qtype_plugin {
     protected function define_question_plugin_structure() {
 
         // Define the virtual plugin element with the condition to fulfill.
-        $plugin = $this->get_plugin_element(null, '../../qtype', 'mchoicefalse2');
+        $plugin = $this->get_plugin_element(null, '../../qtype', 'mchoiceftwo');
 
         // Create one standard named plugin element (the visible container).
         $pluginwrapper = new backup_nested_element($this->get_recommended_name());
@@ -53,16 +53,16 @@ class backup_qtype_mchoicefalse2_plugin extends backup_qtype_plugin {
         $this->add_question_question_answers($pluginwrapper);
 
         // Now create the qtype own structures.
-        $mchoicefalse2 = new backup_nested_element('mchoicefalse2', array('id'), array(
+        $mchoiceftwo = new backup_nested_element('mchoiceftwo', array('id'), array(
             'layout', 'shuffleanswers',
             'correctfeedback', 'correctfeedbackformat',
             'incorrectfeedback', 'incorrectfeedbackformat', 'answernumbering', 'shownumcorrect'));
 
         // Now the own qtype tree.
-        $pluginwrapper->add_child($mchoicefalse2);
+        $pluginwrapper->add_child($mchoiceftwo);
 
         // Set source to populate the data.
-        $mchoicefalse2->set_source_table('qtype_mchoicefalse2_options', array('questionid' => backup::VAR_PARENTID));
+        $mchoiceftwo->set_source_table('qtype_mchoiceftwo_options', array('questionid' => backup::VAR_PARENTID));
 
         // Don't need to annotate ids nor files.
 

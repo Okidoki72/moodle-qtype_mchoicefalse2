@@ -1,23 +1,23 @@
-angular.module('mm.addons.qtype_mchoicefalse2', ['mm.core'])
+angular.module('mm.addons.qtype_mchoiceftwo', ['mm.core'])
 .config(["$mmQuestionDelegateProvider", function($mmQuestionDelegateProvider) {
-    $mmQuestionDelegateProvider.registerHandler('mmaQtypemchoicefalse2', 'qtype_mchoicefalse2', '$mmaQtypemchoicefalse2Handler');
+    $mmQuestionDelegateProvider.registerHandler('mmaQtypemchoiceftwo', 'qtype_mchoiceftwo', '$mmaQtypemchoiceftwoHandler');
 }]);
 
 angular.module('mm.addons.qtype_multichoice')
 .directive('mmaQtypeMultichoice', ["$log", "$mmQuestionHelper", function($log, $mmQuestionHelper) {
-	$log = $log.getInstance('mmaQtypemchoicefalse2');
+	$log = $log.getInstance('mmaQtypemchoiceftwo');
     return {
         restrict: 'A',
         priority: 100,
-        templateUrl: 'addons/qtype/mchoicefalse2/template.html',
+        templateUrl: 'addons/qtype/mchoiceftwo/template.html',
         link: function(scope) {
         	$mmQuestionHelper.multiChoiceDirective(scope, $log);
         }
     };
 }]);
 
-angular.module('mm.addons.qtype_mchoicefalse2')
-.factory('$mmaQtypemchoicefalse2Handler', ["$mmUtil", function($mmUtil) {
+angular.module('mm.addons.qtype_mchoiceftwo')
+.factory('$mmaQtypemchoiceftwoHandler', ["$mmUtil", function($mmUtil) {
     var self = {};
         self.isCompleteResponse = function(question, answers) {
         var isSingle = true,

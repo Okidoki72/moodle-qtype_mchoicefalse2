@@ -17,7 +17,7 @@
 /**
  * Multiple choice question definition classes.
  *
- * @package    qtype_mchoicefalse2
+ * @package    qtype_mchoiceftwo
  * @copyright  2009 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -33,7 +33,7 @@ require_once($CFG->dirroot . '/question/type/multichoice/question.php');
  * @copyright  2010 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_mchoicefalse2_question extends qtype_multichoice_multi_question {
+class qtype_mchoiceftwo_question extends qtype_multichoice_multi_question {
 
     /**
      * Get the grade

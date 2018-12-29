@@ -29,7 +29,7 @@
 
 
         <testsuites>
-            <testsuite name="\question\type\mchoicefalse2">
+            <testsuite name="\question\type\mchoiceftwo">
                 <directory suffix="_test.php">.</directory>
             </testsuite>
         </testsuites>

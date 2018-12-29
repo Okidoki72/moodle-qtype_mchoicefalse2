@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Backup handler for Moodle 1.x mchoicefalse2 questions
+ * Backup handler for Moodle 1.x mchoiceftwo questions
  *
- * @package    qtype_mchoicefalse2
+ * @package    qtype_mchoiceftwo
  * @copyright  2011 David Mudrak <david@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -25,12 +25,12 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * mchoicefalse2 question type conversion handler
+ * mchoiceftwo question type conversion handler
  *
  * @copyright  2011 David Mudrak <david@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class moodle1_qtype_mchoicefalse2_handler extends moodle1_qtype_handler {
+class moodle1_qtype_mchoiceftwo_handler extends moodle1_qtype_handler {
 
     /**
      * Return the subpaths within a question
@@ -40,12 +40,12 @@ class moodle1_qtype_mchoicefalse2_handler extends moodle1_qtype_handler {
     public function get_question_subpaths() {
         return array(
             'ANSWERS/ANSWER',
-            'mchoicefalse2',
+            'mchoiceftwo',
         );
     }
 
     /**
-     * Appends the mchoicefalse2 specific information to the question
+     * Appends the mchoiceftwo specific information to the question
      *
      * @param array $data the question data
      * @param array $raw unused
@@ -57,11 +57,11 @@ class moodle1_qtype_mchoicefalse2_handler extends moodle1_qtype_handler {
             $this->write_answers($data['answers'], $this->pluginname);
         }
 
-        // Convert and write the mchoicefalse2.
-        if (!isset($data['mchoicefalse2'])) {
+        // Convert and write the mchoiceftwo.
+        if (!isset($data['mchoiceftwo'])) {
             // This should never happen, but it can do if the 1.9 site contained
             // corrupt data.
-            $data['mchoicefalse2'] = array(array(
+            $data['mchoiceftwo'] = array(array(
                 'shuffleanswers'                 => 1,
                 'correctfeedback'                => '',
                 'correctfeedbackformat'          => FORMAT_HTML,
@@ -71,39 +71,39 @@ class moodle1_qtype_mchoicefalse2_handler extends moodle1_qtype_handler {
                 'shownumcorrect'                => 0
             ));
         }
-        $this->write_mchoicefalse2($data['mchoicefalse2'], $data['oldqtextformat']);
+        $this->write_mchoiceftwo($data['mchoiceftwo'], $data['oldqtextformat']);
     }
 
     /**
-     * Converts the mchoicefalse2 info and writes it into question XML
+     * Converts the mchoiceftwo info and writes it into question XML
      *
-     * @param array $mchoicefalse2s the grouped structure
+     * @param array $mchoiceftwos the grouped structure
      * @param int $oldqtextformat - (see moodle1_question_bank_handler::process_question())
      */
-    protected function write_mchoicefalse2(array $mchoicefalse2s, $oldqtextformat) {
+    protected function write_mchoiceftwo(array $mchoiceftwos, $oldqtextformat) {
         global $CFG;
 
         // The grouped array is supposed to have just one element - let us use foreach anyway
         // just to be sure we do not loose anything.
-        foreach ($mchoicefalse2s as $mchoicefalse2) {
+        foreach ($mchoiceftwos as $mchoiceftwo) {
             // Append an artificial 'id' attribute (is not included in moodle.xml).
-            $mchoicefalse2['id'] = $this->converter->get_nextid();
+            $mchoiceftwo['id'] = $this->converter->get_nextid();
 
             // Replay the upgrade step 2009021801.
-            $mchoicefalse2['correctfeedbackformat']               = 0;
-            $mchoicefalse2['incorrectfeedbackformat']             = 0;
+            $mchoiceftwo['correctfeedbackformat']               = 0;
+            $mchoiceftwo['incorrectfeedbackformat']             = 0;
 
             if ($CFG->texteditors !== 'textarea' and $oldqtextformat == FORMAT_MOODLE) {
-                $mchoicefalse2['correctfeedback']         = text_to_html($mchoicefalse2['correctfeedback'], false, false, true);
-                $mchoicefalse2['correctfeedbackformat']   = FORMAT_HTML;
-                $mchoicefalse2['incorrectfeedback']       = text_to_html($mchoicefalse2['incorrectfeedback'], false, false, true);
-                $mchoicefalse2['incorrectfeedbackformat'] = FORMAT_HTML;
+                $mchoiceftwo['correctfeedback']         = text_to_html($mchoiceftwo['correctfeedback'], false, false, true);
+                $mchoiceftwo['correctfeedbackformat']   = FORMAT_HTML;
+                $mchoiceftwo['incorrectfeedback']       = text_to_html($mchoiceftwo['incorrectfeedback'], false, false, true);
+                $mchoiceftwo['incorrectfeedbackformat'] = FORMAT_HTML;
             } else {
-                $mchoicefalse2['correctfeedbackformat']   = $oldqtextformat;
-                $mchoicefalse2['incorrectfeedbackformat'] = $oldqtextformat;
+                $mchoiceftwo['correctfeedbackformat']   = $oldqtextformat;
+                $mchoiceftwo['incorrectfeedbackformat'] = $oldqtextformat;
             }
 
-            $this->write_xml('mchoicefalse2', $mchoicefalse2, array('/mchoicefalse2/id'));
+            $this->write_xml('mchoiceftwo', $mchoiceftwo, array('/mchoiceftwo/id'));
         }
     }
 }

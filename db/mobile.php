@@ -15,14 +15,14 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * qtype_mchoicefalse2 capability definition
+ * qtype_mchoiceftwo capability definition
  *
- * @package    qtype_mchoicefalse2
+ * @package    qtype_mchoiceftwo
  * @copyright  2018 Jean-Michel Vedrine
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
 
 $addons = array(
-    "qtype_mchoicefalse2" => array()
+    "qtype_mchoiceftwo" => array()
 );

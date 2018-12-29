@@ -17,7 +17,7 @@
 /**
  * The questiontype class for the multiple choice question type.
  *
- * @package    qtype_mchoicefalse2
+ * @package    qtype_mchoiceftwo
  * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -35,7 +35,7 @@ require_once($CFG->dirroot . '/question/format/xml/format.php');
  * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_mchoicefalse2 extends question_type {
+class qtype_mchoiceftwo extends question_type {
     public function has_html_answers() {
         return true;
     }
@@ -48,7 +48,7 @@ class qtype_mchoicefalse2 extends question_type {
      */
     public function get_question_options($question) {
         global $DB, $OUTPUT;
-        $question->options = $DB->get_record('qtype_mchoicefalse2_options',
+        $question->options = $DB->get_record('qtype_mchoiceftwo_options',
                 array('questionid' => $question->id), '*', MUST_EXIST);
         parent::get_question_options($question);
     }
@@ -122,13 +122,13 @@ class qtype_mchoicefalse2 extends question_type {
             $DB->delete_records('question_answers', array('id' => $oldanswer->id));
         }
 
-        $options = $DB->get_record('qtype_mchoicefalse2_options', array('questionid' => $question->id));
+        $options = $DB->get_record('qtype_mchoiceftwo_options', array('questionid' => $question->id));
         if (!$options) {
             $options = new stdClass();
             $options->questionid = $question->id;
             $options->correctfeedback = '';
             $options->incorrectfeedback = '';
-            $options->id = $DB->insert_record('qtype_mchoicefalse2_options', $options);
+            $options->id = $DB->insert_record('qtype_mchoiceftwo_options', $options);
         }
 
         if (isset($question->layout)) {
@@ -144,7 +144,7 @@ class qtype_mchoicefalse2 extends question_type {
         $options->incorrectfeedbackformat = $question->incorrectfeedback['format'];
         $options->shownumcorrect = !empty($question->shownumcorrect);
 
-        $DB->update_record('qtype_mchoicefalse2_options', $options);
+        $DB->update_record('qtype_mchoiceftwo_options', $options);
         $this->save_hints($question, true);
     }
 
@@ -241,7 +241,7 @@ class qtype_mchoicefalse2 extends question_type {
      * @return stdObject
      */
     protected function make_hint($hint) {
-        return qtype_mchoicefalse2_hint::load_from_record($hint);
+        return qtype_mchoiceftwo_hint::load_from_record($hint);
     }
 
     /**
@@ -252,7 +252,7 @@ class qtype_mchoicefalse2 extends question_type {
      */
     protected function make_question_instance($questiondata) {
         question_bank::load_question_definition_classes($this->name());
-        $class = 'qtype_mchoicefalse2_question';
+        $class = 'qtype_mchoiceftwo_question';
         return new $class();
     }
 
@@ -301,7 +301,7 @@ class qtype_mchoicefalse2 extends question_type {
      */
     public function delete_question($questionid, $contextid) {
         global $DB;
-        $DB->delete_records('qtype_mchoicefalse2_options', array('questionid' => $questionid));
+        $DB->delete_records('qtype_mchoiceftwo_options', array('questionid' => $questionid));
         return parent::delete_question($questionid, $contextid);
     }
 
@@ -455,12 +455,12 @@ class qtype_mchoicefalse2 extends question_type {
      */
     public function import_from_xml($data, $question, qformat_xml $format, $extra=null) {
         // Check question is for us.
-        if (!isset($data['@']['type']) || $data['@']['type'] != 'mchoicefalse2') {
+        if (!isset($data['@']['type']) || $data['@']['type'] != 'mchoiceftwo') {
             return false;
         }
 
         $question = $format->import_headers($data);
-        $question->qtype = 'mchoicefalse2';
+        $question->qtype = 'mchoiceftwo';
 
         $question->shuffleanswers = $format->trans_single(
                 $format->getpath($data, array('#', 'shuffleanswers', 0, '#'), 1));
@@ -586,14 +586,14 @@ class qtype_mchoicefalse2 extends question_type {
 }
 
 /**
- * An extension of {@link question_hint_with_parts} for mchoicefalse2 questions.
+ * An extension of {@link question_hint_with_parts} for mchoiceftwo questions.
  *
  * This has an extra option for whether to show the feedback for each choice.
  *
  * @copyright  2010 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_mchoicefalse2_hint extends question_hint_with_parts {
+class qtype_mchoiceftwo_hint extends question_hint_with_parts {
     /** @var boolean whether to show the feedback for each choice. */
     public $showchoicefeedback;
 
@@ -620,7 +620,7 @@ class qtype_mchoicefalse2_hint extends question_hint_with_parts {
      * @return question_hint_with_parts
      */
     public static function load_from_record($row) {
-        return new qtype_mchoicefalse2_hint($row->id, $row->hint, $row->hintformat,
+        return new qtype_mchoiceftwo_hint($row->id, $row->hint, $row->hintformat,
                 $row->shownumcorrect, $row->clearwrong, !empty($row->options));
     }
 

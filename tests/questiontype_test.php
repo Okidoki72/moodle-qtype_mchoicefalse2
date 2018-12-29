@@ -17,7 +17,7 @@
 /**
  * Unit tests for the mulitple choice question definition class.
  *
- * @package    qtype_mchoicefalse2
+ * @package    qtype_mchoiceftwo
  * @copyright  2009 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -26,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
-require_once($CFG->dirroot . '/question/type/mchoicefalse2/questiontype.php');
+require_once($CFG->dirroot . '/question/type/mchoiceftwo/questiontype.php');
 
 
 /**
@@ -35,11 +35,11 @@ require_once($CFG->dirroot . '/question/type/mchoicefalse2/questiontype.php');
  * @copyright  2009 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_mchoicefalse2_test extends advanced_testcase {
+class qtype_mchoiceftwo_test extends advanced_testcase {
     protected $qtype;
 
     protected function setUp() {
-        $this->qtype = new qtype_mchoicefalse2();
+        $this->qtype = new qtype_mchoiceftwo();
     }
 
     protected function tearDown() {
@@ -47,7 +47,7 @@ class qtype_mchoicefalse2_test extends advanced_testcase {
     }
 
     public function test_name() {
-        $this->assertEquals($this->qtype->name(), 'mchoicefalse2');
+        $this->assertEquals($this->qtype->name(), 'mchoiceftwo');
     }
 
     /**

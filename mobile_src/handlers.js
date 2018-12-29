@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-angular.module('mm.addons.qtype_mchoicefalse2')
+angular.module('mm.addons.qtype_mchoiceftwo')
 
 /**
  * Multi choice question handlers.
@@ -21,7 +21,7 @@ angular.module('mm.addons.qtype_mchoicefalse2')
  * @ngdoc service
  * @name $mmaQtypeMultichoiceHandler
  */
-.factory('$mmaQtypemchoicefalse2Handler', function($mmUtil) {
+.factory('$mmaQtypemchoiceftwoHandler', function($mmUtil) {
 
     var self = {};
 

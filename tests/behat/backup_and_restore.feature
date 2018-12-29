@@ -1,4 +1,4 @@
-@qtype @qtype_mchoicefalse2
+@qtype @qtype_mchoiceftwo
 Feature: Test duplicating a quiz containing a All-or-Nothing Multiple Choice question
   As a teacher
   In order re-use my courses containing All-or-Nothing Multiple Choice questions
@@ -13,7 +13,7 @@ Feature: Test duplicating a quiz containing a All-or-Nothing Multiple Choice que
       | Course       | C1        | Test questions |
     And the following "questions" exist:
       | questioncategory | qtype           | name               | template    |
-      | Test questions   | mchoicefalse2  | All-or-nothing-001 | two_of_four |
+      | Test questions   | mchoiceftwo  | All-or-nothing-001 | two_of_four |
     And the following "activities" exist:
       | activity   | name      | course | idnumber |
       | quiz       | Test quiz | C1     | quiz1    |
